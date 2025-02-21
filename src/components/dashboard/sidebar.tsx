@@ -1,8 +1,9 @@
 
 // * ESTRUTURA SEGUINDO COMPOSITION PATTERN
 
-import { cn } from "@/lib/utils"
 import Link from "next/link"
+
+import { cn } from "@/lib/utils"
 
 export type SidebarGenericProps<T = any> = {
     children: React.ReactNode
@@ -22,7 +23,7 @@ export function Sidebar({ children, className} : SidebarGenericProps) {
 // * CABEÇALHO
 export function SidebarHeader({ children, className} : SidebarGenericProps) {
     return (
-        <header className={cn(['px-6'], className)} >
+        <header className={cn(['px-6 py-3 border-b border-border'], className)} >
             {children}
         </header>
     )

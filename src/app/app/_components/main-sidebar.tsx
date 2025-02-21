@@ -14,6 +14,7 @@ import {
 import { usePathname } from "next/navigation";
 import { HomeIcon, MixerVerticalIcon} from '@radix-ui/react-icons'
 import { UserDropdown } from "./user-dropdown";
+import { Logo } from "@/components/logo";
 
 export function MainSidebar() {
 
@@ -26,7 +27,7 @@ export function MainSidebar() {
     return (
         <Sidebar>
         <SidebarHeader>
-          <h1></h1>
+          <Logo/>
         </SidebarHeader>
         <SidebarMain className="flex flex-col flex-grow">
           <SidebarNav>
