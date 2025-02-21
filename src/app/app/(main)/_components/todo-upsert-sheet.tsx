@@ -1,7 +1,7 @@
-'use client'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+"use client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Sheet,
   SheetClose,
@@ -11,53 +11,74 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
-import React, { useRef } from "react"
-import { Todo } from "./todo-data-table"
+} from "@/components/ui/sheet";
+import React, { useRef } from "react";
+import { Todo } from "./todo-data-table";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { useForm } from "react-hook-form";
 
 type TodoUpsertSheetProps = {
-    children?: React.ReactNode
-    defaultValue?: Todo // temporario
-}
+  children?: React.ReactNode;
+  defaultValue?: Todo; // temporario
+};
 
-export function TodoUpsertSheet({ children } : TodoUpsertSheetProps) {
+export function TodoUpsertSheet({ children }: TodoUpsertSheetProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const form = useForm();
 
-    const ref = useRef<HTMLDivElement>(null)
+  const onSubmit = form.handleSubmit((data) => {
+    console.log("submit");
+  });
 
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <div ref={ref}>
-            {children}
-        </div>
+        <div ref={ref}>{children}</div>
       </SheetTrigger>
+
       <SheetContent>
-        <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
-          <SheetDescription>
-            Make changes to your profile here. Click save when you're done.
-          </SheetDescription>
-        </SheetHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
-          </div>
-        </div>
-        <SheetFooter>
-          <SheetClose asChild>
-            <Button type="submit">Save changes</Button>
-          </SheetClose>
-        </SheetFooter>
+        <Form {...form}>
+          <form onSubmit={onSubmit} className="space-y-8 h-screen">
+            <SheetHeader>
+              <SheetTitle>Edit profile</SheetTitle>
+              <SheetDescription>
+                Make changes to your profile here. Click save when you're done.
+              </SheetDescription>
+            </SheetHeader>
+
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                  <FormControl>
+                    <Input placeholder="shadcn" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is your public display name.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <SheetFooter>
+              <SheetClose asChild>
+                <Button type="submit">Save changes</Button>
+              </SheetClose>
+            </SheetFooter>
+          </form>
+        </Form>
       </SheetContent>
     </Sheet>
-  )
+  );
 }
