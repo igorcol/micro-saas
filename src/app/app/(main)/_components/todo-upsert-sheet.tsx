@@ -1,10 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
   SheetFooter,
@@ -13,7 +11,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import React, { useRef } from "react";
-import { Todo } from "./todo-data-table";
 import {
   Form,
   FormControl,
@@ -25,6 +22,8 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 
+import { Todo } from "../types";
+
 type TodoUpsertSheetProps = {
   children?: React.ReactNode;
   defaultValue?: Todo; // temporario
@@ -35,7 +34,7 @@ export function TodoUpsertSheet({ children }: TodoUpsertSheetProps) {
   const form = useForm();
 
   const onSubmit = form.handleSubmit((data) => {
-    console.log("submit");
+    console.log(data);
   });
 
   return (
@@ -48,23 +47,23 @@ export function TodoUpsertSheet({ children }: TodoUpsertSheetProps) {
         <Form {...form}>
           <form onSubmit={onSubmit} className="space-y-8 h-screen">
             <SheetHeader>
-              <SheetTitle>Edit profile</SheetTitle>
+              <SheetTitle>Create Todo</SheetTitle>
               <SheetDescription>
-                Make changes to your profile here. Click save when you're done.
+                Add o edit your todo item here. Click Submit when you are done.
               </SheetDescription>
             </SheetHeader>
 
             <FormField
               control={form.control}
-              name="username"
+              name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Title</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder="Ex: Call Christhian" {...field} />
                   </FormControl>
                   <FormDescription>
-                    This is your public display name.
+                    This will be the main Title for the task.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -72,9 +71,7 @@ export function TodoUpsertSheet({ children }: TodoUpsertSheetProps) {
             />
 
             <SheetFooter>
-              <SheetClose asChild>
-                <Button type="submit">Save changes</Button>
-              </SheetClose>
+                <Button type="submit">Submit</Button>
             </SheetFooter>
           </form>
         </Form>

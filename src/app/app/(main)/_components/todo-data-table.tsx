@@ -36,14 +36,8 @@ import {
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 
+import { Todo } from "../types"
 
-export type Todo = {
-  id: string
-  title: string
-  createdAt: Date
-  updatedAt: Date
-  fineshedAt?: Date
-}
 
 const data: Todo[] = [
   {

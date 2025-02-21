@@ -10,29 +10,26 @@ import { TodoUpsertSheet } from "./_components/todo-upsert-sheet";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "@radix-ui/react-icons";
 
-
 export default async function Page() {
   return (
     <DashboardPage>
-      
       <DashboardPageHeader>
         <DashboardPageHeaderTitle>Tarefas</DashboardPageHeaderTitle>
         <DashboardPageHeaderNav>
           <DashboardPageHeaderNav>
-              <TodoUpsertSheet>
-                  <Button variant='outline' size='sm'>
-                    <PlusIcon className="w-4 h-4"/>
-                    Add todo
-                  </Button>
-              </TodoUpsertSheet>
+            <TodoUpsertSheet>
+              <Button variant="outline" size="sm">
+                <PlusIcon className="w-4 h-4" />
+                Add todo
+              </Button>
+            </TodoUpsertSheet>
           </DashboardPageHeaderNav>
         </DashboardPageHeaderNav>
       </DashboardPageHeader>
 
       <DashboardPageMain>
-        <TodoDataTable/>
+        <TodoDataTable />
       </DashboardPageMain>
-
     </DashboardPage>
   );
 }
