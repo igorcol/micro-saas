@@ -26,7 +26,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
 import {
   Table,
   TableBody,
@@ -176,6 +175,7 @@ export function TodoDataTable() {
 
   return (
     <div className="w-full">
+      {/*
       <div className="flex items-center py-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -204,6 +204,7 @@ export function TodoDataTable() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+      */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
