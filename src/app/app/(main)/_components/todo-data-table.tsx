@@ -35,6 +35,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Badge } from "@/components/ui/badge"
 
 
 export type Todo = {
@@ -84,16 +85,20 @@ export const columns: ColumnDef<Todo>[] = [
   {
     accessorKey: "status",
     header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize"></div>
-    ),
+    cell: ({ row }) => {
+      const { fineshedAt } = row.original
+      const status: 'done' | 'waiting' = fineshedAt ? 'done' : 'waiting'
+      const statusVariant: 'outline' | 'default' = fineshedAt ? 'default' : 'outline'
+
+      return <Badge variant={statusVariant}>{status}</Badge>
+    },
   },
   {
     accessorKey: "title",
     header: ({ column }) => {
       return (
         <Button
-          variant="ghost"
+          variant="link"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Title
