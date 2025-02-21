@@ -12,5 +12,5 @@ export async function getUserTodos() {
         }
     })
 
-    return []
+    return todos
 }
