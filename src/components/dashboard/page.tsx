@@ -23,9 +23,9 @@ export function DashboardPageHeader({ children, className} : DashboardPageGeneri
 
 export function DashboardPageHeaderTitle({ children, className} : DashboardPageGenericProps) {
     return (
-        <h1 className={cn(['text-muted-foreground uppercase'], className)} >
+        <span className={cn(['text-sm text-muted-foreground uppercase'], className)} >
             {children}
-        </h1>
+        </span>
     )
 }
 
