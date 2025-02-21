@@ -1,5 +1,14 @@
-export default function Page() {
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import { auth } from "@/services/auth"
+import { UserInfo } from "./_components/user-info"
+
+export default async function Page() {
+    const session = await auth()
+
     return (
-        <h1>Main page when logged-in</h1>
+        <main className="flex items-center justify-center h-screen">
+            <UserInfo user={session?.user} />
+        </main>
     )
 }
