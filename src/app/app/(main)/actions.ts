@@ -5,6 +5,7 @@ import { deleteTodoSchema, upsertTodoSchema } from "./schema"
 import { z } from "zod"
 import { error } from "console"
 
+// * GET - TODOS
 export async function getUserTodos() {
     // Verificar o usuario logado 
     // Retornar suas taregas
@@ -22,6 +23,7 @@ export async function getUserTodos() {
     return todos
 }
 
+// * POST - TODOS
 export async function upsertTodo(input: z.infer<typeof upsertTodoSchema>) {
     const session = await auth()
     const sessionUserID = session?.user?.id
@@ -86,6 +88,7 @@ export async function upsertTodo(input: z.infer<typeof upsertTodoSchema>) {
     return todo
 }
 
+// * DELETE - TODOS
 export async function deleteTodo(input: z.infer<typeof deleteTodoSchema>) {
     const session = await auth()
     const sessionUserID = session?.user?.id

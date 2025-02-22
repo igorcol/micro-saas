@@ -3,7 +3,6 @@ import {
   DashboardSidebar,
   DashboardSidebarFooter,
   DashboardSidebarHeader,
-  DashboardSidebarHeaderTitle,
   DashboardSidebarMain,
   DashboardSidebarNav,
   DashboardSidebarNavHeader,

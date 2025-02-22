@@ -1,14 +1,7 @@
-import { DashboardPage, DashboardPageHeader, DashboardPageHeaderTitle, DashboardPageMain } from "@/components/dashboard/page";
+import { DashboardSidebar, DashboardSidebarNav, DashboardSidebarNavLink, DashboardSidebarNavMain } from "@/components/dashboard/sidebar";
 
 export default function Page() {
     return (
-            <DashboardPage>
-                <DashboardPageHeader>
-                    <DashboardPageHeaderTitle>Settings</DashboardPageHeaderTitle>
-                </DashboardPageHeader>
-                <DashboardPageMain>
-                    <h1>Settings</h1>
-                </DashboardPageMain>
-            </DashboardPage>
+            <h1>settings</h1>
         )
 }

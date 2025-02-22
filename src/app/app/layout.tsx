@@ -3,6 +3,8 @@ import { PropsWithChildren } from "react";
 import { MainSidebar } from "./_components/main-sidebar";
 import { auth } from "@/services/auth";
 
+// Tudo que é mostrado quando logado
+
 export default async function Layout({ children }: PropsWithChildren) {
 
   const session = await auth()
