@@ -10,12 +10,21 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { SheetFooter } from "@/components/ui/sheet"
+import { Session } from "next-auth"
 
-export function ProfileForm() {
+type ProfileFormProps = {
+    defaultValues: Session['user']
+}
+
+export function ProfileForm({ defaultValues } : ProfileFormProps) {
     const router = useRouter()
 
     const form = useForm({
-        resolver: zodResolver(updateProfileSchema)
+        resolver: zodResolver(updateProfileSchema),
+        defaultValues: {
+            name: defaultValues?.name ?? '',
+            email: defaultValues?.email ?? ''
+        }
     })
 
     const onSubmit = form.handleSubmit(async (data) => {
@@ -39,7 +48,7 @@ export function ProfileForm() {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Ex: John Dee" {...field} />
+                    <Input placeholder="Ex: John Dee"  {...field} />
                   </FormControl>
                   <FormDescription>
                     This will be the name displayed on your profile.
@@ -56,10 +65,10 @@ export function ProfileForm() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Ex: john.dee@example.com" {...field} />
+                    <Input placeholder="Ex: john.dee@example.com" readOnly {...field} />
                   </FormControl>
-                  <FormDescription>
-                    This will be the email associated with your profile.
+                  <FormDescription className="text-blue-500" >
+                    To change your email, please contact support at contato@micro-saas.com.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
