@@ -1,6 +1,7 @@
 import { DashboardPage, DashboardPageHeader, DashboardPageHeaderTitle, DashboardPageMain } from "@/components/dashboard/page";
 import { DashboardSidebarNav, DashboardSidebarNavMain, DashboardSidebarNavLink } from "@/components/dashboard/sidebar";
 import { PropsWithChildren } from "react";
+import SettingsSidebar from "./_components/settings-sidebar";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
@@ -11,15 +12,7 @@ export default function Layout({ children }: PropsWithChildren) {
 
       <DashboardPageMain>   
         <div className="grid grid-cols-[16rem_1fr]">
-          <aside>
-          <DashboardSidebarNav>
-                <DashboardSidebarNavMain>
-                    <DashboardSidebarNavLink href="/App/settings/home">My profile</DashboardSidebarNavLink>
-                    <DashboardSidebarNavLink href="/App/settings/theme">Theme</DashboardSidebarNavLink>
-                    <DashboardSidebarNavLink href="/App/settings/billing">Billing</DashboardSidebarNavLink>
-                </DashboardSidebarNavMain>
-            </DashboardSidebarNav>
-          </aside>
+          <SettingsSidebar />
           <div>{children}</div>
         </div>
       </DashboardPageMain>
