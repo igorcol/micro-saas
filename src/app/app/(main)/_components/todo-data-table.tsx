@@ -39,51 +39,17 @@ import { Badge } from "@/components/ui/badge"
 import { Todo } from "../types"
 
 
-const data: Todo[] = [
-  {
-    id: "1",
-    title: "Aprender TypeScript",
-    createdAt: new Date("2023-01-01"),
-    updatedAt: new Date("2023-01-02"),
-    fineshedAt: new Date("2023-01-03"),
-  },
-  {
-    id: "2",
-    title: "Construir um App React",
-    createdAt: new Date("2023-02-01"),
-    updatedAt: new Date("2023-02-02"),
-  },
-  {
-    id: "3",
-    title: "Escrever Testes Unitários",
-    createdAt: new Date("2023-03-01"),
-    updatedAt: new Date("2023-03-02"),
-    fineshedAt: new Date("2023-03-03"),
-  },
-  {
-    id: "4",
-    title: "Fazer Deploy em Produção",
-    createdAt: new Date("2023-04-01"),
-    updatedAt: new Date("2023-04-02"),
-  },
-  {
-    id: "5",
-    title: "Monitorar Performance",
-    createdAt: new Date("2023-05-01"),
-    updatedAt: new Date("2023-05-02"),
-  }
-]
 
 export const columns: ColumnDef<Todo>[] = [
   {
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      const { fineshedAt } = row.original
-      const status: 'done' | 'waiting' = fineshedAt ? 'done' : 'waiting'
-      const statusVariant: 'outline' | 'default' = fineshedAt ? 'default' : 'outline'
+      const { doneAt } = row.original
+      const status: 'done' | 'waiting' = doneAt ? 'done' : 'waiting'
+      const variant: 'outline' | 'default' = doneAt ? 'default' : 'outline'
 
-      return <Badge variant={statusVariant}>{status}</Badge>
+      return <Badge variant={variant}>{status}</Badge>
     },
   },
   {
@@ -139,7 +105,11 @@ export const columns: ColumnDef<Todo>[] = [
   },
 ]
 
-export function TodoDataTable() {
+type TodoDataTable =  {
+  data: Todo[]
+}
+
+export function TodoDataTable({ data } : TodoDataTable) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

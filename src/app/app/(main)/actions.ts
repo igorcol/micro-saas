@@ -9,7 +9,7 @@ export async function getUserTodos() {
     const todos = await  prisma.todo.findMany({
         where: {
             userId: session?.user?.id
-        }
+        } 
     })
 
     return todos
