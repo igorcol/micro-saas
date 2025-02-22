@@ -34,6 +34,7 @@ export default async function Page() {
       <DashboardPageMain>
         <TodoDataTable data={todos} />
       </DashboardPageMain>
+      
     </DashboardPage>
   );
 }
