@@ -1,6 +1,7 @@
+'use server'
 import { auth } from "@/services/auth"
 import { prisma } from "@/services/database"
-import { upsertTodoSchema } from "./schema"
+import { deleteTodoSchema, upsertTodoSchema } from "./schema"
 import { z } from "zod"
 import { error } from "console"
 
@@ -12,7 +13,10 @@ export async function getUserTodos() {
     const todos = await  prisma.todo.findMany({
         where: {
             userId: session?.user?.id
-        } 
+        },
+        orderBy: {
+            createdAt: 'desc'
+        }
     })
 
     return todos
@@ -24,15 +28,13 @@ export async function upsertTodo(input: z.infer<typeof upsertTodoSchema>) {
 
     if(!sessionUserID) {
         return {
-            error: 'Not authorized.',
+            error: 'Please, Log In first.',
             data: null
         }
     }
 
     // * UPDATE
     if ( input.id ) {
-
-        
         const todo = await prisma.todo.findUnique({
             where: {
                 id: input.id,
@@ -74,7 +76,7 @@ export async function upsertTodo(input: z.infer<typeof upsertTodoSchema>) {
         }
     }
 
-    const todo = await  prisma.todo.create({
+    const todo = await prisma.todo.create({
         data: {
             title: input.title,
             userId: sessionUserID
@@ -83,3 +85,45 @@ export async function upsertTodo(input: z.infer<typeof upsertTodoSchema>) {
 
     return todo
 }
+
+export async function deleteTodo(input: z.infer<typeof deleteTodoSchema>) {
+    const session = await auth()
+    const sessionUserID = session?.user?.id
+
+    if(!sessionUserID) {
+        return {
+            error: 'Please, Log In first.',
+            data: null
+        }
+    }
+
+    const todo = await prisma.todo.findUnique({
+        where: {
+            id: input.id,
+            userId: sessionUserID
+        },
+        select: {
+            id: true
+        }
+    })
+
+    if(!todo) {
+        return {
+            error: 'Not found.',
+            data: null
+        }
+    }
+
+    await prisma.todo.delete({
+        where: {
+            id: input.id,
+            userId: sessionUserID
+        }
+    })
+
+    return {
+        error: null,
+        data: 'Todo deleted succesfully.'
+    }
+}
+
