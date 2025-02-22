@@ -69,7 +69,7 @@ export function TodoDataTable({ data } : TodoDataTable) {
   }
 
   const handleToggleDoneTodo = async (todo: Todo) => {
-    const doneAt = todo.doneAt ? null :  new Date()
+    const doneAt = todo.doneAt ? null :  new Date().toISOString()
     await upsertTodo({id: todo.id, doneAt})
     router.refresh()
     toast({
