@@ -9,7 +9,6 @@ import { updateProfile } from "../actions";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SheetFooter } from "@/components/ui/sheet";
 import { Session } from "next-auth";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 type ProfileFormProps = {
   defaultValues: Session["user"];
@@ -48,7 +47,7 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={onSubmit} className="space-y-8 h-screen">
+      <form onSubmit={onSubmit} className="space-y-8">
         <Card>
           <CardHeader>
             <CardTitle>
@@ -81,8 +80,7 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
                 Email
             </CardTitle>
             <CardDescription className="text-blue-500">
-                To change your email, please contact support at
-                contato@micro-saas.com.
+                To change your email, contact contact@micro-saas.com.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -103,7 +101,10 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
         </Card>
 
         <SheetFooter>
-          <Button type="submit">Save Changes</Button>
+          <Button disabled={form.formState.isSubmitting} type="submit">
+            {!form.formState.isSubmitting && 'Save Changes'}
+            {form.formState.isSubmitting && 'Saving...'}
+          </Button>
         </SheetFooter>
       </form>
     </Form>
