@@ -1,6 +1,7 @@
+import { ThemeForm } from "./_components/form";
 
 export default function Page() {
     return (
-            <h1>settings / theme</h1>
+            <ThemeForm/>
         )
 }
